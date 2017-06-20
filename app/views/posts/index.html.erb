@@ -1,0 +1,50 @@
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Hi <%= @current_user.first_name%></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/sessions/<%= session[:user_id] %>" data-method="delete">Logout</a></li>
+      </ul>
+    </div>
+</nav>
+
+<div class="container">
+	<div class="row">
+		<div>
+			<% if flash[:errors] %>
+				<% flash[:errors].each do |error| %>
+					<p class="error"><%= error %></p>
+				<% end %>
+			<% end %>
+		</div>
+		<form class="col s12 " action="/posts" method="post">
+			<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token %>">
+			<div class="input-field col s6 l8">
+	      		  <i class="material-icons prefix">account_circle</i>
+		          <label for="content">Post</label>
+		          <input id="content" placeholder="Post something witty here..." type="text" name="post[content]" class="validate">
+		    </div>
+
+			<div class="row">
+	      		<div class="col l8 right-align">
+		        	<button class="btn waves-effect waves-light" type="submit" >Idea<i class="material-icons right">send</i>
+		  			</button>
+	  			</div>
+	      	</div>		
+		</form>
+	</div>
+
+	<div clas="row">
+		<% @posts.each do |post| %>
+			<div class="divider"></div>
+			<div class="section">
+				<h3><a href="/users/<%= post.user.id %>"><%= post.user.first_name %></a> says:</h3>
+				<p><%= post.content %></p>
+				<p> <a href="/bright_ideas/<%= post.id%>"><%=post.likes.count %> people</a> like this</p>
+				<% if post.user.id == session[:user_id]%>
+						<a href="/posts/<%= post.id%>" data-method="delete"><button>Delete</button></a>
+				<% end %>
+				<a href="/posts/<%= post.id%>/likes"><button>Like</button></a>
+			</div>
+		<% end%>
+	</div>
+</div>

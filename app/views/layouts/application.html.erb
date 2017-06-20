@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ruby2Belt</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+  </head>
+
+  <body>
+    <%= yield %>
+    <script type="text/javascript">  
+      $(document).ready(function() {
+        $('select').material_select();
+        $('.datepicker').pickadate({
+          selectMonths: true, // Creates a dropdown to control month
+          selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+      });
+      </script> 
+  </body>
+</html>

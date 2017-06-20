@@ -1,0 +1,21 @@
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Hi <%= @current_user.first_name%></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/sessions/<%= session[:user_id] %>" data-method="delete">Logout</a></li>
+        <li><a href="/bright_ideas">Bright Ideas</a></li>
+      </ul>
+    </div>
+</nav>
+
+<div class="container">
+	<div class="row">
+		<h3>Name: <%= @current_user.first_name%> <%= @current_user.first_name%></h3>
+		<h3>Alias: <%= @current_user.alias%></h3>
+		<h3>Email: <%= @current_user.email%></h3>
+	</div>
+	<div class="row">
+		<h4>Total Nmber of Post: <%= @user_posts.count %></h4>
+		<h4>Total Nmber of likes: <%= @post_liked.count %></h4>
+	</div>
+</div>

@@ -1,0 +1,31 @@
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Hi <%= @current_user.first_name%></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/sessions/<%= session[:user_id] %>" data-method="delete">Logout</a></li>
+        <li><a href="/bright_ideas">Bright Ideas</a></li>
+      </ul>
+    </div>
+</nav>
+
+<div class="container">
+	<div class="row">
+		<h3><a href="/users/<%= session[:user_id]%>"><%= @post.user.alias%></a> says:</h3>
+		<h5><%= @post.content%></h5>
+	</div>
+
+	<div class="row">
+		<table  class="bordered">
+			<tr>
+				<th>Alias</th>
+				<th>Name</th>
+			</tr>
+			<%= @users_liked.each do |user| %>
+				<tr>
+					<td><a href="/users/<%= user.id%>"><%= user.alias %></td>
+					<td><%= user.first_name %> <%= user.last_name %></td>
+				</tr>
+			<% end %>			
+		</table>
+	</div>
+</div>
