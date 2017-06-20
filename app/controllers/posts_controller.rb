@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
+	before_action :user_authorized
 	def index
 		@current_user = current_user
-		@posts = Post.all
+		@posts = Post.all.joins("left join likes on posts.id = likes.post_id").select("posts.*, count(likes.id) as count_likes").group("posts.id").order("count_likes desc")
 	end
 
 	def create

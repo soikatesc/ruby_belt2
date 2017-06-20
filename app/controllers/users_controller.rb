@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :user_logged_in, only: [:new]
+	before_action :user_authorized, only: [:show]
 	def new
 	end
 
